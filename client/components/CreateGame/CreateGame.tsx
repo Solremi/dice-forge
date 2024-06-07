@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Dropdown, Form, FormInput } from 'semantic-ui-react';
+import { Button, Dropdown, Form, FormInput, Input } from 'semantic-ui-react';
 import { ILicenceOption } from '../../@Types/game';
 import axiosInstance from '../../axios/axios';
 import { useAppDispatch } from '../../hooks/hooks';
@@ -20,10 +20,9 @@ function CreateGame() {
 
   useEffect(() => {
     axiosInstance
-      .get('license')
+      .get('/api/license')
       .then((response) => {
         const { data } = response;
-
         if (data) {
           const options = data.map((license: ILicenceOption) => ({
             key: license.id,
@@ -40,11 +39,12 @@ function CreateGame() {
 
   const postGame = async (formData: any) => {
     try {
-      const response = await axiosInstance.post('/game', formData);
+      const response = await axiosInstance.post('/api/game', formData);
 
+      console.log('Success:', response.data);
       const gameId = response.data.id;
       dispatch(actionSetGameId({ gameId }));
-      navigate(`/api/game/${gameId}`);
+      navigate(`/api/game/:${gameId}`);
     } catch (error) {
       console.error('Error:', error);
     }
@@ -71,6 +71,7 @@ function CreateGame() {
       license_name: licences,
       email: email,
     };
+    console.log('Form data:', formData);
 
     postGame(formData);
   };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Button, Icon, Image } from 'semantic-ui-react';
 import { IGames } from '../../@Types/game';
 import axiosInstance from '../../axios/axios';
@@ -15,7 +15,6 @@ function Profile() {
   const firstname = useAppSelector((state) => state.user.firstname);
   const [games, setGames] = useState<IGames[]>([]);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const getGame = async () => {
@@ -31,7 +30,7 @@ function Profile() {
 
   const deleteGame = async (gameId: number) => {
     try {
-      await axiosInstance.delete(`/game/${gameId}`);
+      await axiosInstance.delete(`/api/game/${gameId}`);
       setGames((prevGames) => prevGames.filter((game) => game.id !== gameId));
     } catch (error) {
       console.log('Erreur lors de la suppression de la partie', error);
@@ -89,7 +88,7 @@ function Profile() {
                   </NavLink>
                   <div className="profile-game-url">
                     <p className="profile-game-link">
-                      http://localhost:5173/api/game/
+                    {`/api/game/${game.id}`}
                       {game.id}
                     </p>
                   </div>

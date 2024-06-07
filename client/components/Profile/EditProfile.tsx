@@ -1,7 +1,7 @@
 import { Button, Form, FormInput } from 'semantic-ui-react';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
-import { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import './EditProfil.scss';
 
 function EditProfile() {

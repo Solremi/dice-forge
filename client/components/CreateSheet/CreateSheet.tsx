@@ -67,7 +67,7 @@ function CreateSheet() {
 
   const postUserCreateSheet = async (datas: SheetData) => {
     try {
-      const response = await axiosInstance.post('sheet', datas);
+      const response = await axiosInstance.post('/api/sheet', datas);
     } catch (error) {
       console.error('Error:', error);
     }

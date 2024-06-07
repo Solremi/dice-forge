@@ -1,21 +1,23 @@
 import axios from 'axios';
 
+
+const baseURL = typeof process !== 'undefined' && process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL : 'http://localhost:5000';
+
 const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000',
+  baseURL: baseURL,
 });
 
-axiosInstance.interceptors.request.use(
-  (config) => {
-    const token = sessionStorage.getItem('accessToken'); // Utiliser sessionStorage pour le token
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
+axiosInstance.interceptors.request.use((config) => {
+  const token = sessionStorage.getItem('accessToken');
+  if (token) {
+    config.headers['Authorization'] = `Bearer ${token}`;
+    config.headers['Content-Type'] = 'application/json'; // Ensure this if required
   }
-);
+  return config;
+}, (error) => {
+  return Promise.reject(error);
+});
+
 
 export function addTokenJwtToAxiosInstance(token: string) {
   axiosInstance.defaults.headers.common.Authorization = `Bearer ${token}`;

@@ -25,7 +25,7 @@ function Login() {
 
   const postUser = async (formData: IUserLogin) => {
     try {
-      const response = await axiosInstance.post('/login', formData);
+      const response = await axiosInstance.post('/api/login', formData);
 
       if (response.status === 200) {
         setSuccessMessage(response.data.message);

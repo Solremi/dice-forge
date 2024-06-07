@@ -17,7 +17,7 @@ function SheetInfo() {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        axiosInstance.get('/sheet')
+        axiosInstance.get('/api/sheet')
             .then(response => {
                 setSheet(response.data);
             })

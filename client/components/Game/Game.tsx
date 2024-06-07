@@ -53,7 +53,7 @@ function Game() {
   useEffect(() => {
     const getGameById = async () => {
       try {
-        const response = await axiosInstance.get(`/game/${gameId}`);
+        const response = await axiosInstance.get(`/api/game/${gameId}`);
         if (response.status === 200) {
           setGame(response.data);
         }
