@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-
-const baseURL = typeof process !== 'undefined' && process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL : 'http://localhost:5000';
+const baseURL = process.env.REACT_APP_API_URL;
 
 const axiosInstance = axios.create({
   baseURL: baseURL,

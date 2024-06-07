@@ -28,7 +28,7 @@ function Chat({ gameUrl }: { gameUrl: string }) {
   const socket = useRef<Socket | null>(null);
 
   useEffect(() => {
-    socket.current = io('http://localhost:5000');
+    socket.current = io(process.env.REACT_APP_SOCKET_URL as string);
 
     /* This part of the code is setting up an event listener on the socket
     connection for the event named 'message'. When the socket receives a
@@ -46,7 +46,7 @@ function Chat({ gameUrl }: { gameUrl: string }) {
         socket.current.disconnect();
       }
     };
-  }, [activeTab, gameUrl]);
+  }, [gameUrl]);
 
   const sendMessage = () => {
     if (input.trim() && socket.current) {
