@@ -4,19 +4,19 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { Icon } from 'semantic-ui-react'; 
 import { useAppSelector } from '../../hooks/hooks'; 
 import { actionUserLogOut } from '../../store/reducers/userReducer';  
-import './Header.scss'; // Ensure this import path is correct
+import './Header.scss'; 
 
 function Header() {
-  const [isOpen, setIsOpen] = useState(false); // State for menu toggle
-  const navigate = useNavigate(); // Navigation hook
+  const [isOpen, setIsOpen] = useState(false); 
+  const navigate = useNavigate(); 
   const toggleMenu = () => {
-    setIsOpen(!isOpen); // Toggle menu function
+    setIsOpen(!isOpen); 
   };
-  const isLogged = useAppSelector((state) => state.user.isLogged); // Selector hook
-  const dispatch = useDispatch(); // Dispatch hook
+  const isLogged = useAppSelector((state) => state.user.isLogged); 
+  const dispatch = useDispatch();
 
   const logout = () => {
-    dispatch(actionUserLogOut()); // Dispatch logout action
+    dispatch(actionUserLogOut()); 
     navigate('/'); // Navigate to home
   };
 
@@ -26,7 +26,7 @@ function Header() {
         <div className="Header-block">
           <img
             className="Header-logo"
-            src="/d20-7136921_640.png" // Corrected image path
+            src="/logo192.png" 
             alt="Logo Dice Forge"
           />
           <NavLink to="/">
