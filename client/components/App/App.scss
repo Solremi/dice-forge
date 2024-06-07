@@ -1,0 +1,9 @@
+@use '../../styles/variables' as v;
+
+.App {
+  min-height: 100vh;
+  max-height: max-content;
+  background-image: url(../../../public/paper-1074131_1280.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}

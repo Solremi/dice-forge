@@ -1,0 +1,108 @@
+@use '../../styles/variables' as v;
+
+.Header {
+  width: 100%;
+  background-color: v.$color-primary;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  &-top {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0.5rem 2rem;
+  }
+
+  &-block {
+    display: flex;
+    align-items: center;
+  }
+
+  &-logo {
+    height: 5rem;
+  }
+
+  &-title {
+    font-size: 4rem;
+    margin: 0 1rem;
+    color: v.$color;
+  }
+  &-burger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: v.$color;
+    cursor: pointer;
+  }
+
+  &-menu {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem;
+    background-color: v.$color-primary-light;
+    &.open {
+      flex-direction: column;
+    }
+  }
+
+  &-link {
+    margin: 0 2rem;
+    text-decoration: none;
+    color: v.$color;
+
+    &-btn {
+      background: none;
+      border: none;
+      color: v.$color;
+      cursor: pointer;
+      margin: 0 2rem;
+      padding: 0;
+    }
+
+    &-btn:hover {
+      color: rgb(145, 144, 144);
+    }
+  }
+
+  &-link:hover {
+    color: rgb(145, 144, 144);
+  }
+
+  &-block2 {
+    display: flex;
+    align-items: center;
+    margin-right: 3rem;
+  }
+}
+
+@media (max-width: 580px) {
+  .Header-burger {
+    display: block;
+  }
+  .Header-top {
+    justify-content: space-between;
+  }
+  .Header-menu {
+    display: none;
+    flex-direction: column;
+  }
+  .Header-menu.open {
+    display: flex;
+    align-items: center;
+  }
+  .Header-logo {
+    height: 4rem;
+  }
+  .Header-title {
+    font-size: 2.5rem;
+  }
+
+  .Header-link,
+  .Header-link-btn {
+    margin: 0.5rem auto;
+  }
+}

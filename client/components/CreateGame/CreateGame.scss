@@ -1,0 +1,58 @@
+@use '../../styles/variables' as v;
+
+.ui.icon.button.create-game-add-player-btn {
+  color: v.$color;
+  background-color: v.$color-orange-light;
+  margin-bottom: 2rem;
+}
+.ui.icon.button.create-game-delete-player-btn {
+  color: v.$color;
+  background-color: red;
+}
+.ui.button.create-game-submit-btn {
+  color: v.$color;
+  background-color: v.$color-orange;
+}
+
+.create-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+
+  &-content {
+    flex-grow: 1;
+  }
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+  }
+
+  &-title {
+    font-size: 2rem;
+    padding: 0.75rem 1.5rem;
+    color: v.$color-blue;
+    background-color: v.$color;
+    border-radius: 1.5rem;
+    border: 5px solid v.$color-blue;
+  }
+
+  &-input {
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+  &-licences {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    width: 100%;
+    font-weight: bold;
+    color: v.$color;
+    &-input {
+      font-weight: normal;
+    }
+  }
+}
