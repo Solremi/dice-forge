@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Button, Icon, Image } from 'semantic-ui-react';
@@ -20,7 +20,7 @@ function Profile() {
   useEffect(() => {
     const getGame = async () => {
       try {
-        const response = await axiosInstance.get(`/profile/${userId}`);
+        const response = await axiosInstance.get(`/api/profile/${userId}`);
         setGames(response.data);
       } catch (error) {
         console.log('error', error);
@@ -44,7 +44,7 @@ function Profile() {
       <div className="profile-page">
         <div className="profile-user">
           <Image
-            src="public/LogoDiceForge.jpg"
+            src="/LogoDiceForge.jpg"
             circular
             size="small"
             className="profile-avatar"

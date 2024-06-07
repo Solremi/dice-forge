@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
 import { Button, Form, FormInput, FormTextArea } from 'semantic-ui-react';
@@ -55,7 +55,7 @@ function CreateSheet() {
   useEffect(() => {
     const getGame = async () => {
       try {
-        const response = await axiosInstance.get(`/profile/${userId}`);
+        const response = await axiosInstance.get(`/api/profile/${userId}`);
 
         setGames(response.data);
       } catch (error) {

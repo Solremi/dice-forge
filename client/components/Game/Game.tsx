@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { Button, Checkbox, Container, Dropdown } from 'semantic-ui-react';
 import { IGames } from '../../@Types/game';

@@ -1,3 +1,4 @@
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
 import {
@@ -19,7 +20,7 @@ function Home() {
     <div className="home">
       <Header />
       <Image
-        src="public/LogoDiceForge.jpg"
+        src="/LogoDiceForge.jpg"
         size="large"
         className="home-logo"
       />

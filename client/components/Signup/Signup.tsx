@@ -1,3 +1,4 @@
+import React from 'react';
 import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Form, FormInput } from 'semantic-ui-react';
@@ -26,7 +27,7 @@ function Signup() {
    requête POST à http://localhost:5000/api/signup en utilisant Axios.
   */
   const postUser = async (formData: IUser) => {
-    const response = await axiosInstance.post('/signup', formData);
+    const response = await axiosInstance.post('/api/signup', formData);
   };
 
   /**
