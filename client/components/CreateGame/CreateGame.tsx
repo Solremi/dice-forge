@@ -71,8 +71,6 @@ function CreateGame() {
       license_name: licences,
       email: email,
     };
-    console.log('Form data:', formData);
-
     postGame(formData);
   };
 

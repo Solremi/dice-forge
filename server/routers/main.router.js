@@ -17,3 +17,4 @@ router.use("/api", (isLoggedIn, profileRouter));
 router.use("/api", (isLoggedIn, licenseRouter));
 
 export default router;
+

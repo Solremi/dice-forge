@@ -24,9 +24,6 @@ function App() {
   const dispatch = useDispatch();
   const user = useAppSelector((state) => state.user);
   const gameId = useAppSelector((state) => state.game.gameId);
-  console.log('je suis le state de gameId :', gameId);
-
-  console.log('je suis le state de app :', user);
   const navigate = useNavigate();
 
   useEffect(() => {
