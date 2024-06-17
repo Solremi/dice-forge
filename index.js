@@ -2,19 +2,20 @@
 import 'dotenv/config';
 import express from 'express';
 import { createServer } from 'node:http';
-import router from './app/routers/main.router.js';
+import router from './server/routers/main.router.js';
 import session from 'express-session';
 import cors from 'cors';
 import corsOptions from './config/cors.config.js';
 import setupSocket from './config/socket.config.js';
-import errorHandler from './app/middlewares/errorHandler.middleware.js';
+import errorHandler from './server/middlewares/errorHandler.middleware.js';
 import setupSwagger from './config/swagger.config.js';
+/*
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
+*/
 
 const app = express();
 const httpServer = createServer(app);
