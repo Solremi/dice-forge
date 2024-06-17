@@ -2,7 +2,6 @@ import axios from 'axios';
 
 
 const baseURL = (import.meta as any).env.REACT_APP_API_URL;
-console.log('API URL:', baseURL);
 
 const axiosInstance = axios.create({
   baseURL: baseURL,
