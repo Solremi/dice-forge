@@ -1,9 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import request from 'supertest';  // Supposant que vous utilisez supertest pour des tests d'intégration
-import app from '../index.js';  // Assurez-vous que ce chemin est correct pour votre serveur Express
 import GameDataMapper from '../server/datamappers/game.datamapper.js';
+import { createGame } from '../server/controllers/game.controller.js';  
 
-// Mock de GameDataMapper et des dépendances si nécessaire
 vi.mock('../server/datamappers/game.datamapper.js', () => ({
   default: vi.fn().mockImplementation(() => ({
     findLicenseByName: vi.fn().mockResolvedValue(true),  // Supposons que la licence existe
@@ -48,6 +46,4 @@ describe('createGame Controller', () => {
     expect(res.status).toHaveBeenCalledWith(400);
     expect(res.json).toHaveBeenCalledWith({ error: 'Champs de jeu requis manquants.' });
   });
-
-  // Vous pourriez également ajouter d'autres tests pour couvrir tous les cas possibles
 });

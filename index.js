@@ -19,7 +19,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const httpServer = createServer(app);
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.NODE_ENV === 'test' ? 0 : process.env.PORT || 5000;
 
 // Middleware pour parser les corps de requêtes
 app.use(express.urlencoded({ extended: true }));
