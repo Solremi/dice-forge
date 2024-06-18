@@ -2,7 +2,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import request from 'supertest';
 import app from '../index.js';
-import emailValidator from 'email-validator';
 
 vi.mock('../server/datamappers/user.datamapper', () => ({
   default: vi.fn().mockImplementation(() => ({
