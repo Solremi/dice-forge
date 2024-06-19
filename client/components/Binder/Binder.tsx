@@ -59,7 +59,7 @@ function Binder() {
     const getSheets = async () => {
       try {
         const response = await axiosInstance.get(
-          '/api/binder'
+          '/api/binder/:id'
         );
 
         setSheets(response.data);
