@@ -6,10 +6,16 @@ class GameDataMapper {
     }
 
     async findGameById(id) {
+        const numericId = parseInt(id, 10);  
+        if (isNaN(numericId)) {
+            throw new Error('Invalid input');
+        }
+    
         const query = 'SELECT * FROM game WHERE id = $1';
-        const result = await this.pool.query(query, [id]);
-        return result.rows[0] || null;
+        const result = await this.pool.query(query, [numericId]);
+        return result.rows[0];
     }
+    
 
     async findGamesByUserId(userId) {
         const query = ` 
