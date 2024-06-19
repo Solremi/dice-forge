@@ -49,7 +49,7 @@ const CardItem: React.FC<Sheet> = ({
   </Card>
 );
 
-function Binder() {
+const Binder: React.FC = () => {
   const location = useLocation();
   const gameId = Number(location.state);
 
@@ -58,17 +58,17 @@ function Binder() {
   useEffect(() => {
     const getSheets = async () => {
       try {
-        const response = await axiosInstance.get(
-          '/api/binder/:id'
-        );
-
-        setSheets(response.data);
+        // Assurez-vous que gameId est correctement défini avant de faire l'appel
+        if (gameId) {
+          const response = await axiosInstance.get(`/api/binder/${gameId}`);
+          setSheets(response.data);
+        }
       } catch (error) {
         console.log('Erreur lors de la récupération des fiches', error);
       }
     };
     getSheets();
-  }, []);
+  }, [gameId]); // Ajoutez gameId comme dépendance pour relancer l'effet si gameId change
 
   return (
     <div className="binder">
@@ -82,7 +82,7 @@ function Binder() {
               content="Créer une fiche"
             />
           </NavLink>
-          <NavLink to="/api/game/">
+          <NavLink to={`/api/game/${gameId}`}>
             <Button
               className="binder-btn-backToGame"
               content="Retour à la partie"
@@ -90,7 +90,7 @@ function Binder() {
           </NavLink>
         </div>
         <Container
-          className={sheets ? 'binder-container-hidden' : 'binder-container'}
+          className={sheets.length === 0 ? 'binder-container-hidden' : 'binder-container'}
         >
           <CardGroup>
             {sheets.map((sheet) => (
