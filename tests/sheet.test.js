@@ -72,7 +72,7 @@ describe('createSheet Controller', () => {
 
     it('should return 200 if all sheets are found', async () => {
         const response = await request(app)
-            .get('/api/binder')
+            .get('/api/binder/:id')
             .set('Authorization', `Bearer ${validToken}`);
         expect(response.status).toBe(200);
     });

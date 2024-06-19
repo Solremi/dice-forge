@@ -132,7 +132,8 @@ function CreateSheet() {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
     const datas = {
       name: characterName,
       image: avatarPreview,
@@ -162,7 +163,7 @@ function CreateSheet() {
       <h1 className="create-sheet-title">Création de Fiche</h1>
       <div className="create-sheet-content">
         <h2 className="create-sheet-subtitle">Fiche Personnage</h2>
-        <Form className="create-sheet-form">
+        <Form className="create-sheet-form" onSubmit={handleSubmit} >
           <div>
             <div>
               <div className="create-sheet-game">
@@ -322,7 +323,6 @@ function CreateSheet() {
               className="create-sheet-submit-btn"
               type="submit"
               content="Valider"
-              onClick={handleSubmit}
             />
           </div>
         </Form>
