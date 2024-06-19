@@ -13,6 +13,16 @@ export const getSheet = async (req, res) => {
     return res.status(200).json(sheet);
 };
 
+export const getSheetsByGameId = async (req, res) => {
+    const game_id = req.params.game_id;
+    const sheets = await sheetDataMapper.findSheetsByGameId(game_id);
+
+    if (!sheets) {
+        return res.status(404).json({ error: "Aucune fiche n'a été trouvée." });
+    }
+    return res.status(200).json(sheets);
+}
+
 export const createSheet = async (req, res) => {
     const sheet = req.body;
     const createdSheet = await sheetDataMapper.createSheet(sheet);

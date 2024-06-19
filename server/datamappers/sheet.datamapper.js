@@ -14,6 +14,12 @@ class SheetDataMapper {
         const result = await this.pool.query(query);
         return result.rows;
     }
+
+    async findSheetsByGameId(game_id) {
+        const query = 'SELECT * FROM sheet WHERE game_id = $1';
+        const result = await this.pool.query(query, [game_id]);
+        return result.rows;
+    }
     
     async createSheet(sheet) {
         if (!Number.isInteger(sheet.level) || !Number.isInteger(sheet.game_id)) {
