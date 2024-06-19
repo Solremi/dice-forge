@@ -28,7 +28,7 @@ function Chat({ gameUrl }: { gameUrl: string }) {
   const socket = useRef<Socket | null>(null);
 
   useEffect(() => {
-    socket.current = io(process.env.REACT_APP_SOCKET_URL as string);
+    socket.current = io((import.meta as any).env.VITE_SOCKET_URL as any);
 
     /* This part of the code is setting up an event listener on the socket
     connection for the event named 'message'. When the socket receives a
