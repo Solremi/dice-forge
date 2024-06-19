@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
 import { Button, Form, FormInput, FormTextArea } from 'semantic-ui-react';
 import { v4 as uuidv4 } from 'uuid';
@@ -33,6 +33,7 @@ interface SheetData {
 function CreateSheet() {
   const location = useLocation();
   const gameId = location.state;
+  const navigate = useNavigate();
 
   const [characteristics, setCharacteristics] = useState<Characteristic[]>([
     { id: uuidv4(), name: '', value: '' },
@@ -56,7 +57,6 @@ function CreateSheet() {
     const getGame = async () => {
       try {
         const response = await axiosInstance.get(`/api/profile/${userId}`);
-
         setGames(response.data);
       } catch (error) {
         console.log('error', error);
@@ -68,8 +68,10 @@ function CreateSheet() {
   const postUserCreateSheet = async (datas: SheetData) => {
     try {
       const response = await axiosInstance.post('/api/sheet', datas);
+      return response.data;
     } catch (error) {
       console.error('Error:', error);
+      throw error;
     }
   };
 
@@ -132,9 +134,9 @@ function CreateSheet() {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const datas = {
+    const datas: SheetData = {
       name: characterName,
       image: avatarPreview,
       class: className,
@@ -153,8 +155,12 @@ function CreateSheet() {
       })),
     };
 
-    JSON.stringify(datas);
-    postUserCreateSheet(datas);
+    try {
+      await postUserCreateSheet(datas);
+      navigate(`/api/binder/${gameId}`);
+    } catch (error) {
+      console.error('Failed to create sheet', error);
+    }
   };
 
   return (
@@ -163,7 +169,7 @@ function CreateSheet() {
       <h1 className="create-sheet-title">Création de Fiche</h1>
       <div className="create-sheet-content">
         <h2 className="create-sheet-subtitle">Fiche Personnage</h2>
-        <Form className="create-sheet-form" onSubmit={handleSubmit} >
+        <Form className="create-sheet-form" onSubmit={handleSubmit}>
           <div>
             <div>
               <div className="create-sheet-game">
@@ -271,7 +277,7 @@ function CreateSheet() {
 
           <h2 className="create-sheet-subtitle">Inventaire</h2>
           {items.map((item) => (
-            <div className="create-sheet-inventory-content">
+            <div className="create-sheet-inventory-content" key={item.id}>
               <FormInput
                 className="create-sheet-input"
                 label="Nom de l'objet :"
