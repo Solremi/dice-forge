@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Dropdown, Form, FormInput, Input } from 'semantic-ui-react';
+import { Button, Dropdown, Form, FormInput, Input, Message } from 'semantic-ui-react';
 import { ILicenceOption } from '../../@Types/game';
 import axiosInstance from '../../axios/axios';
 import { useAppDispatch } from '../../hooks/hooks';
@@ -14,6 +14,7 @@ function CreateGame() {
   const [licences, setLicences] = useState<string>('');
   const [players, setPlayers] = useState<string[]>(['']);
   const [licenseOptions, setLicenseOptions] = useState<ILicenceOption[]>([]);
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -40,11 +41,10 @@ function CreateGame() {
   const postGame = async (formData: any) => {
     try {
       const response = await axiosInstance.post('/api/game', formData);
-
       console.log('Success:', response.data);
       const gameId = response.data.id;
       dispatch(actionSetGameId({ gameId }));
-      navigate(`/api/game/:${gameId}`);
+      navigate(`/profile/${gameId}`);
     } catch (error) {
       console.error('Error:', error);
     }
@@ -64,12 +64,40 @@ function CreateGame() {
     setPlayers(players.filter((_, i) => i !== index));
   };
 
+  const validateEmail = (email: string) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
   const handleSubmit = () => {
-    const email = players;
+    if (!title) {
+      setErrorMessage('Le nom de la partie est obligatoire.');
+      return;
+    }
+
+    if (title.length <= 2) {
+      setErrorMessage('Le nom de la partie doit contenir plus de 2 lettres.');
+      return;
+    }
+
+    if (!licences) {
+      setErrorMessage('La licence est obligatoire.');
+      return;
+    }
+
+    for (const email of players) {
+      if (email && !validateEmail(email)) {
+        setErrorMessage(`L'email ${email} n'est pas valide.`);
+        return;
+      }
+    }
+
+    setErrorMessage('');
+
     const formData = {
       name: title,
       license_name: licences,
-      email: email,
+      email: players,
     };
     postGame(formData);
   };
@@ -126,6 +154,12 @@ function CreateGame() {
               icon="plus"
               className="create-game-add-player-btn"
             />
+            {errorMessage && (
+              <Message negative>
+                <Message.Header>Erreur</Message.Header>
+                <p>{errorMessage}</p>
+              </Message>
+            )}
             <div className="submit-container">
               <Button
                 onClick={handleSubmit}
