@@ -10,7 +10,7 @@ axiosInstance.interceptors.request.use((config) => {
   const token = sessionStorage.getItem('accessToken');
   if (token) {
     config.headers['Authorization'] = `Bearer ${token}`;
-    config.headers['Content-Type'] = 'application/json'; // Ensure this if required
+    config.headers['Content-Type'] = 'application/json'; 
   }
   return config;
 }, (error) => {
@@ -27,3 +27,6 @@ export function removeTokenJwtFromAxiosInstance() {
 }
 
 export default axiosInstance;
+
+
+

@@ -27,9 +27,9 @@ describe('createUser Controller', () => {
 
   it('should return error if the email is not valid', async () => {
     const newUser = {
-        lastname: 'Doe',
-        firstname: 'John',
-        email: 'john.doe',
+        lastname: 'Marcus',
+        firstname: 'Michel',
+        email: 'marcus.michel',
         password: 'Password123',
         confirmPassword: 'Password123'
     };

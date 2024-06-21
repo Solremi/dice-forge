@@ -17,3 +17,5 @@ export const generateResetToken = () => {
     const resetTokenExpiry = new Date(Date.now() + 3600000); // 1 hour
     return { resetToken, resetTokenExpiry };
 };
+
+

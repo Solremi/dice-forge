@@ -38,3 +38,6 @@ export const createUser = async (req, res) => {
     await userDataMapper.createUser( lastname, firstname, email, hashedPassword);
     return res.status(201).json({ message: "Utilisateur créé" });
 }
+
+
+
